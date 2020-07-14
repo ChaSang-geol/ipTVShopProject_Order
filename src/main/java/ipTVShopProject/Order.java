@@ -69,11 +69,12 @@ public class Order {
             BeanUtils.copyProperties(this, orderCancelRejected);
             orderCancelRejected.setStatus("ORDERCANCELREJECTED");
             orderCancelRejected.publishAfterCommit();
-        }else if(this.getStatus().equals("JOINORDERCOMPLETE")){
+        }
+        else if(this.getStatus().equals("JOINORDERCOMPLETE"))
+        {
             // System.out.println("00000000000000JOINORDERCOMPLETE000000000");
             JoinOrderCompleted joinOrderCompleted = new JoinOrderCompleted();
             BeanUtils.copyProperties(this, joinOrderCompleted);
-            joinOrderCompleted.setStatus("JOINORDERCOMPLETE");
             joinOrderCompleted.publishAfterCommit();
 
         }

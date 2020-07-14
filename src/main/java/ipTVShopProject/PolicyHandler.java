@@ -36,7 +36,7 @@ public class PolicyHandler{
 //            System.out.println("111111111111111111111111111111111111111111111" );
            Optional<Order> orders = orderRepository.findById(joinCompleted.getOrderId());
             orders.get().setId(joinCompleted.getId());
-            orders.get().setStatus(joinCompleted.getStatus());
+            orders.get().setStatus("JOINORDERCOMPLETE");
             orderRepository.save(orders.get());
 
 //            if(orderRepository.findById(joinCompleted.getOrderId()) != null) {

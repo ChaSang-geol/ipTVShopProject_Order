@@ -15,11 +15,11 @@ import java.util.Optional;
   @Autowired
   OrderRepository orderRepository;
 
-  @RequestMapping(method=RequestMethod.PATCH, path="/Orders")
-  public void orderCancel(@RequestParam(value="orderId", required=false, defaultValue="0") Long orderId) {
+  @RequestMapping(method=RequestMethod.PATCH, path="/orders/cancel")
+  public void orderCancel(@RequestParam(value="orderId", required=false, defaultValue="0") String orderId) {
 
-   Optional<Order> orders = orderRepository.findById(orderId);
-   orders.get().setId(orderId);
+   Optional<Order> orders = orderRepository.findById(Long.valueOf(orderId));
+   orders.get().setId(Long.valueOf(orderId));
    orders.get().setStatus("CANCELORDERED");
    orderRepository.save(orders.get());
   }
