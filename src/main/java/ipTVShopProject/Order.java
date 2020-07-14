@@ -22,29 +22,11 @@ public class Order {
     public void onPostPersist(){
 
         if(this.getStatus().equals("JOINORDED")){
-            System.out.println("00000000000JOINORDED000000000000");
+            //System.out.println("00000000000JOINORDED000000000000");
             JoinOrdered joinOrdered = new JoinOrdered();
             BeanUtils.copyProperties(this, joinOrdered);
             joinOrdered.publishAfterCommit();
-        }else if(this.getStatus().equals("ORDERCANCELED")){
-            System.out.println("00000000000ORDERCANCELED000000000000");
-            OrderCanceled orderCanceled = new OrderCanceled();
-            orderCanceled.setStatus("ORDERCANCELED");
-            orderCanceled.publishAfterCommit();
-        }else if(this.getStatus().equals("ORDERCANCELREJECTED")){
-            System.out.println("000000000ORDERCANCELREJECTED00000000000000");
-            OrderCancelRejected orderCancelRejected = new OrderCancelRejected();
-            orderCancelRejected.setStatus("ORDERCANCELREJECTED");
-            orderCancelRejected.publishAfterCommit();
-        }else if(this.getStatus().equals("JOINORDERCOMPLETE")){
-            System.out.println("00000000000000JOINORDERCOMPLETE000000000");
-            JoinOrderCompleted joinOrderCompleted = new JoinOrderCompleted();
-            joinOrderCompleted.setStatus("JOINORDERCOMPLETE");
-            joinOrderCompleted.publishAfterCommit();
-
         }
-
-
 
 //        joinOrdered.setId(this.getId());
 //        joinOrdered.setStatus(this.getStatus());
@@ -70,24 +52,52 @@ public class Order {
     @PostUpdate
     public void onPostUpdate(){
 
-        CancelOrdered cancelOrdered = new CancelOrdered();
-        BeanUtils.copyProperties(this, cancelOrdered);
-        cancelOrdered.publishAfterCommit();
+        if(this.getStatus().equals("CANCELORDERED")){
+            //System.out.println("00000000000JOINORDED000000000000");
+            CancelOrdered cancelOrdered = new CancelOrdered();
+            BeanUtils.copyProperties(this, cancelOrdered);
+            cancelOrdered.publishAfterCommit();
+        }else if(this.getStatus().equals("ORDERCANCELED")){
+            // System.out.println("00000000000ORDERCANCELED000000000000");
+            OrderCanceled orderCanceled = new OrderCanceled();
+            BeanUtils.copyProperties(this, orderCanceled);
+            orderCanceled.setStatus("ORDERCANCELED");
+            orderCanceled.publishAfterCommit();
+        }else if(this.getStatus().equals("ORDERCANCELREJECTED")){
+            //System.out.println("000000000ORDERCANCELREJECTED00000000000000");
+            OrderCancelRejected orderCancelRejected = new OrderCancelRejected();
+            BeanUtils.copyProperties(this, orderCancelRejected);
+            orderCancelRejected.setStatus("ORDERCANCELREJECTED");
+            orderCancelRejected.publishAfterCommit();
+        }else if(this.getStatus().equals("JOINORDERCOMPLETE")){
+            // System.out.println("00000000000000JOINORDERCOMPLETE000000000");
+            JoinOrderCompleted joinOrderCompleted = new JoinOrderCompleted();
+            BeanUtils.copyProperties(this, joinOrderCompleted);
+            joinOrderCompleted.setStatus("JOINORDERCOMPLETE");
+            joinOrderCompleted.publishAfterCommit();
+
+        }
 
 
-        OrderCanceled orderCanceled = new OrderCanceled();
-        BeanUtils.copyProperties(this, orderCanceled);
-        orderCanceled.publishAfterCommit();
 
-
-        OrderCancelRejected orderCancelRejected = new OrderCancelRejected();
-        BeanUtils.copyProperties(this, orderCancelRejected);
-        orderCancelRejected.publishAfterCommit();
-
-
-        JoinOrderCompleted joinOrderCompleted = new JoinOrderCompleted();
-        BeanUtils.copyProperties(this, joinOrderCompleted);
-        joinOrderCompleted.publishAfterCommit();
+//        CancelOrdered cancelOrdered = new CancelOrdered();
+//        BeanUtils.copyProperties(this, cancelOrdered);
+//        cancelOrdered.publishAfterCommit();
+//
+//
+//        OrderCanceled orderCanceled = new OrderCanceled();
+//        BeanUtils.copyProperties(this, orderCanceled);
+//        orderCanceled.publishAfterCommit();
+//
+//
+//        OrderCancelRejected orderCancelRejected = new OrderCancelRejected();
+//        BeanUtils.copyProperties(this, orderCancelRejected);
+//        orderCancelRejected.publishAfterCommit();
+//
+//
+//        JoinOrderCompleted joinOrderCompleted = new JoinOrderCompleted();
+//        BeanUtils.copyProperties(this, joinOrderCompleted);
+//        joinOrderCompleted.publishAfterCommit();
 
 //        if("CANCELORDERED".equals(this.getStatus())){
 //            CancelOrdered cancelOrdered = new CancelOrdered();
