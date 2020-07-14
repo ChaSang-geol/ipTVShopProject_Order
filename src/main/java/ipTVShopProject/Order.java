@@ -28,25 +28,6 @@ public class Order {
             joinOrdered.publishAfterCommit();
         }
 
-//        joinOrdered.setId(this.getId());
-//        joinOrdered.setStatus(this.getStatus());
-//        joinOrdered.setProductId(this.getProductId());
-//        System.out.println("00000000000000000000000");
-//        if("1001".equals(this.getProductId())){
-//            joinOrdered.setProductName("인터넷");
-//            System.out.println("1111111111111111");
-//        }else if("1002".equals(this.getProductId())){
-//            joinOrdered.setProductName("인터넷+BTV");
-//            System.out.println("222222222222222222222222");
-//        }
-//
-//        //joinOrdered.setProductName(this.getProductName());
-//        joinOrdered.setInstallationAddress(this.getInstallationAddress());
-//        joinOrdered.setCustomerId(this.getCustomerId());
-//        System.out.println("333333333333333333333333333");
-
-
-
     }
 
     @PostUpdate
@@ -63,13 +44,14 @@ public class Order {
             BeanUtils.copyProperties(this, orderCanceled);
             orderCanceled.setStatus("ORDERCANCELED");
             orderCanceled.publishAfterCommit();
-        }else if(this.getStatus().equals("ORDERCANCELREJECTED")){
-            //System.out.println("000000000ORDERCANCELREJECTED00000000000000");
-            OrderCancelRejected orderCancelRejected = new OrderCancelRejected();
-            BeanUtils.copyProperties(this, orderCancelRejected);
-            orderCancelRejected.setStatus("ORDERCANCELREJECTED");
-            orderCancelRejected.publishAfterCommit();
         }
+//        else if(this.getStatus().equals("ORDERCANCELREJECTED")){
+//            //System.out.println("000000000ORDERCANCELREJECTED00000000000000");
+//            OrderCancelRejected orderCancelRejected = new OrderCancelRejected();
+//            BeanUtils.copyProperties(this, orderCancelRejected);
+//            orderCancelRejected.setStatus("ORDERCANCELREJECTED");
+//            orderCancelRejected.publishAfterCommit();
+//        }
         else if(this.getStatus().equals("JOINORDERCOMPLETE"))
         {
             // System.out.println("00000000000000JOINORDERCOMPLETE000000000");
@@ -99,43 +81,6 @@ public class Order {
 //        JoinOrderCompleted joinOrderCompleted = new JoinOrderCompleted();
 //        BeanUtils.copyProperties(this, joinOrderCompleted);
 //        joinOrderCompleted.publishAfterCommit();
-
-//        if("CANCELORDERED".equals(this.getStatus())){
-//            CancelOrdered cancelOrdered = new CancelOrdered();
-//
-//            cancelOrdered.setId(this.getId());
-//            cancelOrdered.setStatus(this.getStatus());
-//            cancelOrdered.setProductId(this.getProductId());
-//            cancelOrdered.setProductName(this.getProductName());
-//            cancelOrdered.setInstallationAddress(this.getInstallationAddress());
-//            cancelOrdered.setCustomerId(this.getCustomerId());
-//            cancelOrdered.setOrderDate(this.getOrderDate());
-//
-//            cancelOrdered.publishAfterCommit();
-//
-//        }else if("ORDERCANCELED".equals(this.getStatus())){
-//            OrderCanceled orderCanceled = new OrderCanceled();
-//
-//            orderCanceled.setStatus(this.getStatus());
-//
-//            orderCanceled.publishAfterCommit();
-//
-//        }else if("ORDERCANCELREJECTED".equals(this.getStatus())){
-//            OrderCancelRejected orderCancelRejected = new OrderCancelRejected();
-//
-//            orderCancelRejected.setStatus(this.getStatus());
-//
-//            orderCancelRejected.publishAfterCommit();
-//
-//        }else if("JOINORDERCOMPLETE".equals(this.getStatus())){
-//            JoinOrderCompleted joinOrderCompleted = new JoinOrderCompleted();
-//
-//            joinOrderCompleted.setId(this.getId());
-//            joinOrderCompleted.setStatus(this.getStatus());
-//
-//            joinOrderCompleted.publishAfterCommit();
-//
-//        }
 
 
     }

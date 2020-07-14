@@ -34,56 +34,31 @@ public class PolicyHandler{
         if(joinCompleted.isMe() && joinCompleted.getStatus()!=null){
 
 //            System.out.println("111111111111111111111111111111111111111111111" );
-           Optional<Order> orders = orderRepository.findById(joinCompleted.getOrderId());
+            Optional<Order> orders = orderRepository.findById(joinCompleted.getOrderId());
             orders.get().setId(joinCompleted.getId());
             orders.get().setStatus("JOINORDERCOMPLETE");
             orderRepository.save(orders.get());
 
-//            if(orderRepository.findById(joinCompleted.getOrderId()) != null) {
-//                Order order = new Order();
-//                order.setId(joinCompleted.getOrderId());
-//                order.setStatus(joinCompleted.getStatus());
-//                orderRepository.save(order);
 //            }
             System.out.println("##### listener JoinCompletionNotify status : " + joinCompleted.getStatus());
 
         }
     }
-    @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverOrderCancelNotAccepted_OrderCancelImpossible(@Payload OrderCancelNotAccepted orderCancelNotAccepted){
-
-        if(orderCancelNotAccepted.isMe() && orderCancelNotAccepted.getStatus()!=null){
-
-            System.out.println("22222222222222222222222222222222222222222222" );
-
-            Optional<Order> orders = orderRepository.findById(orderCancelNotAccepted.getOrderId());
-            orders.get().setId(orderCancelNotAccepted.getId());
-            orders.get().setStatus(orderCancelNotAccepted.getStatus());
-            orderRepository.save(orders.get());
-
-
-//            if(orderRepository.findById(orderCancelNotAccepted.getOrderId()) != null) {
-//                Order order = new Order();
-//                order.setId(orderCancelNotAccepted.getOrderId());
-//                order.setStatus(orderCancelNotAccepted.getStatus());
-//                orderRepository.save(order);
-//            }
-
-//            Order order = orderRepository.findById(orderCancelNotAccepted.getOrderId());
-//            //order.setCustomerId(orderCancelNotAccepted.);
-//            order.setInstallationAddress(orderCancelNotAccepted.getInstallationAddress());
-//            //order.setOrderDate(orderCancelNotAccepted.);
-//            //order.setProductId(orderCancelNotAccepted.getp);
-//            //order.setProductName(orderCancelNotAccepted.);
-//            order.setStatus(orderCancelNotAccepted.getStatus());
-//            order.setId(orderCancelNotAccepted.getId());
-//            orderRepository.save(order);
-
-
-
-            System.out.println("##### listener OrderCancelImpossible status : " + orderCancelNotAccepted.getStatus());
-        }
-    }
+//    @StreamListener(KafkaProcessor.INPUT)
+//    public void wheneverOrderCancelNotAccepted_OrderCancelImpossible(@Payload OrderCancelNotAccepted orderCancelNotAccepted){
+//
+//        if(orderCancelNotAccepted.isMe() && orderCancelNotAccepted.getStatus()!=null){
+//
+//            System.out.println("22222222222222222222222222222222222222222222" );
+//
+//            Optional<Order> orders = orderRepository.findById(orderCancelNotAccepted.getOrderId());
+//            orders.get().setId(orderCancelNotAccepted.getId());
+//            orders.get().setStatus("ORDERCANCELREJECTED");
+//            orderRepository.save(orders.get());
+//
+//            System.out.println("##### listener OrderCancelImpossible status : " + orderCancelNotAccepted.getStatus());
+//        }
+//    }
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverOrderCancelAccepted_OrderCancelAccept(@Payload OrderCancelAccepted orderCancelAccepted){
 
@@ -93,25 +68,9 @@ public class PolicyHandler{
 
             Optional<Order> orders = orderRepository.findById(orderCancelAccepted.getOrderId());
             orders.get().setId(orderCancelAccepted.getId());
-            orders.get().setStatus(orderCancelAccepted.getStatus());
+            orders.get().setStatus("ORDERCANCELED");
             orderRepository.save(orders.get());
 
-//            if(orderRepository.findById(orderCancelAccepted.getOrderId()) != null) {
-//                Order order = new Order();
-//                order.setId(orderCancelAccepted.getOrderId());
-//                order.setStatus(orderCancelAccepted.getStatus());
-//                orderRepository.save(order);
-//            }
-
-//            Order order = new Order();
-//            //order.setCustomerId(orderCancelAccepted.getcu);
-//            order.setInstallationAddress(orderCancelAccepted.getInstallationAddress());
-//            //order.setOrderDate(orderCancelAccepted.);
-//            //order.setProductId(orderCancelAccepted.getp);
-//            //order.setProductName(orderCancelAccepted.);
-//            order.setStatus(orderCancelAccepted.getStatus());
-//            order.setId(orderCancelAccepted.getId());
-//            orderRepository.save(order);
 
             System.out.println("##### listener OrderCancelAccept status : " + orderCancelAccepted.getStatus());
             System.out.println("##### listener OrderCancelAccept status : " + orderCancelAccepted.toJson());
